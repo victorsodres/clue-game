@@ -1,0 +1,7 @@
+.board-col {
+  background: lightgrey;
+}
+
+.room-cell {
+  background: lightblue!important;
+}
