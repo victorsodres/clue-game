@@ -5,7 +5,7 @@ function backColor(colorName) {
 
 // Pintando as bordas
 for(var i = 0; i < b.cols(); i++){
-  b.cell([0, i]).style(backColor('gray'));
+  b.cell([0, i]).style(backColor('light'));
   b.cell([b.rows()-1, i]).style(backColor('gray'));
 }
 
@@ -34,25 +34,22 @@ function fillRoomColors(linhaInicial, linhaFinal, colunaInicial, rangeDireita){
 
 //SALA - STUDY
 fillRoomColors(0, 4, 0, 7);
-
 //SALA - HALL
 fillRoomColors(0, 7, 9, 6);
-
 //SALA - LOUNG
 fillRoomColors(0, 6, 17, 7);
-
 //SALA - LIBRARY
 fillRoomColors(6, 10, 0, 7);
-
-// //SALA - BILLIARD ROOM
-// fillRoomColors(10, 16, 0, 6);
-// //SALA - CONSERVATORY
-// fillRoomColors(15, 20, 0, 6);
-// //SALA - DINING ROOM
-// fillRoomColors(11, 16, 0, 6);
-//
-// //SALA - BALLROOM
-// fillRoomColors(6, 10, 0, 7);
-//
-// //SALA - KITCHEN
-// fillRoomColors(6, 10, 0, 7);
+//SALA - BILLIARD ROOM
+fillRoomColors(11, 17, 0, 6);
+//SALA - CONSERVATORY
+fillRoomColors(19, 24, 0, 6);
+//CENTRO - CLUE
+fillRoomColors(8, 15, 9, 5);
+//SALA - DINING ROOM
+fillRoomColors(9, 15, 17, 7);
+//SALA - BALLROOM
+fillRoomColors(17, 23, 9, 6);
+fillRoomColors(23, 24, 10, 4);
+//SALA - KITCHEN
+fillRoomColors(17, 24, 17, 7);

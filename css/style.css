@@ -1,7 +1,11 @@
-.board-col {
+#game {
+  background: rgb(150, 136, 79);
+}
+
   background: lightgrey;
+.board-col {
 }
 
 .room-cell {
-  background: lightblue!important;
+  background: lightgrey!important;
 }
