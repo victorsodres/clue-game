@@ -2,10 +2,25 @@
   background: rgb(150, 136, 79);
 }
 
-  background: lightgrey;
-.board-col {
-}
-
 .room-cell {
   background: lightgrey!important;
+}
+
+.center {
+    margin: auto;
+    width: 95%;
+}
+
+#HUD {
+  background-color: lightgray;
+  float: left;
+  border: 1px solid black;
+  margin-left: 35px;
+  width: 400px;
+  height: 650px;
+}
+
+#content {
+  align-content: center;
+  margin-top: 35px;
 }
