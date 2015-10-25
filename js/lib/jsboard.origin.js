@@ -22,8 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-define([], function(){
-return window.jsboard = (function(){
+
+window.jsboard = (function(){
 
     'use strict';
 
@@ -68,7 +68,7 @@ return window.jsboard = (function(){
             cell: function(arr,move) {
                 // get DOM node for given row and col
                 function getBoardCell(row,col) {
-                    return document.getElementById("board-row-"+row).childNodes[col];
+                    return document.getElementsByClassName("boardRow_"+row)[0].childNodes[col];
                 }
                 // get DOM node from given data attribute
                 function getObjFromDataAtr(pl) {
@@ -103,10 +103,7 @@ return window.jsboard = (function(){
                     DOM: function() {
                         if (typeof arr[0] == "number") {
                             if (arr[0]<0||arr[1]<0||arr[0]>size[0]-1||arr[1]>size[1]-1) { return document.createElement("div"); }
-                            if(move)
-                              return Array.prototype.slice.call(document.getElementById("board-row-"+arr[0]).childNodes).slice(arr[1], arr[1]+move);
-                            else
-                              return document.getElementById("board-row-"+arr[0]).childNodes[arr[1]];
+                            return document.getElementsByClassName("boardRow_"+arr[0])[0].childNodes[arr[1]];
                         }
                         else {
                             var wh = getObjFromDataAtr(arr.attributes["data-matrixval"].value);
@@ -302,12 +299,10 @@ return window.jsboard = (function(){
                         // create table data to represent game board in DOM
                         for (var i=0; i<size[0]; i++) {
                             var a = document.createElement("tr");
-                            a.id = "board-row-"+i;
-                            a.className = "board-row";
+                            a.className = "boardRow_"+i;
                             for (var k=0; k<size[1]; k++) {
                                 var t = document.createElement("td");
-                                t.className = 'board-col';
-                                t.id = 'board-col-'+k;
+                                t.className = 'boardCol_'+k;
                                 t.dataset.matrixval = i+"x"+k;
                                 a.appendChild(t);
                             }
@@ -316,9 +311,9 @@ return window.jsboard = (function(){
                         // style default game board
                         document.getElementById(props.attach).style.borderSpacing  = "2px";
                         for (var i=0; i<document.getElementsByTagName("td").length; i++) {
-                            document.getElementsByTagName("td")[i].style.background = "rgb(192, 175, 104)";
-                            document.getElementsByTagName("td")[i].style.width = "30px";
-                            document.getElementsByTagName("td")[i].style.height = "30px";
+                            document.getElementsByTagName("td")[i].style.background = "lightgray";
+                            document.getElementsByTagName("td")[i].style.width = "50px";
+                            document.getElementsByTagName("td")[i].style.height = "50px";
                         }
                         // create checkerboard pattern
                         if (props.style && props.style=="checkerboard") {
@@ -334,7 +329,7 @@ return window.jsboard = (function(){
                                 else var skipCol = false;
                                 for (var c=0; c<size[1]; c++) {
                                     if (skipCol)
-                                        document.getElementById("board-row-"+r).childNodes[c].style.background = colour;
+                                        document.getElementsByClassName("boardRow_"+r)[0].childNodes[c].style.background = colour;
                                     skipCol = !skipCol;
                                 }
                             }
@@ -367,4 +362,3 @@ return window.jsboard = (function(){
     return methods;
 
 }());
-});
