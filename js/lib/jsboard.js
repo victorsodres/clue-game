@@ -291,9 +291,10 @@ window.jsboard = (function(){
                         // style default game board
                         document.getElementById(props.attach).style.borderSpacing  = "2px";
                         for (var i=0; i<document.getElementsByTagName("td").length; i++) {
-                            document.getElementsByTagName("td")[i].style.background = "rgb(192, 175, 104)";
-                            document.getElementsByTagName("td")[i].style.width = "30px";
-                            document.getElementsByTagName("td")[i].style.height = "30px";
+                            document.getElementsByTagName("td")[i].style.background = "lightgray";
+                            //document.getElementsByTagName("td")[i].style.background = "rgb(192, 175, 104)";
+                            document.getElementsByTagName("td")[i].style.width = "50px";
+                            document.getElementsByTagName("td")[i].style.height = "50px";
                         }
                         // create checkerboard pattern
                         if (props.style && props.style=="checkerboard") {

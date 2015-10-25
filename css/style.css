@@ -11,6 +11,10 @@
     width: 95%;
 }
 
+.green {
+  background: lightgreen !important;
+}
+
 #HUD {
   background-color: lightgray;
   float: left;
