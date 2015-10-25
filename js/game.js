@@ -1,6 +1,10 @@
-// b.cell("each").on("click", function() {
-//   if (b.cell(this).get() === null)
-//     b.cell(this).place(playerRed);
-//   else
-//     b.cell(this).rid();
-// });
+require(['layout', 'setup'], function(Layout, Setup){
+  Game = {
+    init: function(){
+      Setup.init();
+      Layout.init();
+    }
+  }
+
+  Game.init();
+});
