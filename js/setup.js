@@ -5,18 +5,6 @@ define(['lib/jsboard'], function(jsboard){
 
   Setup = {
     init: function() {
-      function createUniquePiece(color, text){
-        return jsboard.piece({
-          text: text,
-          textIndent:"-9999px",
-          background:"url('img/pieces/"+color+".svg') no-repeat",
-          width:"20px",
-          height:"20px",
-          margin:"0 auto",
-          "background-size":"contain"
-        }).clone();
-      }
-
       var personagens = [
         {
           color: 'red',
@@ -54,12 +42,12 @@ define(['lib/jsboard'], function(jsboard){
         return { assunto: el };
       });
 
-      var playerRed = createUniquePiece('red', 'Stephanie');
-      var playerYellow = createUniquePiece('yellow', 'Candido');
-      var playerGreen = createUniquePiece('green', 'Sodre');
-      var playerPurple = createUniquePiece('purple', 'Maia');
-      var playerBlue = createUniquePiece('blue', 'Igor');
-      var playerWhite = createUniquePiece('white', 'Alati');
+      var playerRed = this.createUniquePiece('red', 'Stephanie');
+      var playerYellow = this.createUniquePiece('yellow', 'Candido');
+      var playerGreen = this.createUniquePiece('green', 'Sodre');
+      var playerPurple = this.createUniquePiece('purple', 'Maia');
+      var playerBlue = this.createUniquePiece('blue', 'Igor');
+      var playerWhite = this.createUniquePiece('white', 'Alati');
 
       //Colocando peça dos jogadores na posição inicial
       b.cell([5, 0]).place(playerPurple);
@@ -150,6 +138,18 @@ define(['lib/jsboard'], function(jsboard){
       //   else
       //     b.cell(this).rid();
       // });
+    },
+
+    createUniquePiece: function(color, text){
+      return jsboard.piece({
+        text: text,
+        textIndent:"-9999px",
+        background:"url('img/pieces/"+color+".svg') no-repeat",
+        width:"20px",
+        height:"20px",
+        margin:"0 auto",
+        "background-size":"contain"
+      }).clone();
     }
   }
 

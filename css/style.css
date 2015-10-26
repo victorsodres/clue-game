@@ -1,3 +1,7 @@
+body {
+  font-family: sans-serif;
+}
+
 #game {
   background: rgb(150, 136, 79);
 }
