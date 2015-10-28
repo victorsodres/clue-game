@@ -76,10 +76,12 @@ define(['lib/jsboard'], function(jsboard){
 
         newLocs.push(
                     [loc[0]-1,loc[1]],   [loc[0]+1,loc[1]],
-                    [loc[0],loc[1]-1],   [loc[0],loc[1]+1],
-                    [loc[0]-1,loc[1]-1], [loc[0]-1,loc[1]+1],
-                    [loc[0]+1,loc[1]-1], [loc[0]+1,loc[1]+1]
+                    [loc[0],loc[1]-1],   [loc[0],loc[1]+1]
                 );
+
+        newLocs = newLocs.filter(function(loc){
+          return b.cell(loc).DOM().style.backgroundColor != "gray" && b.cell(loc).DOM().style.backgroundColor != "rgb(211, 211, 211)";
+        });
 
         // remove illegal moves by checking
         // content of b.cell().get()

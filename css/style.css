@@ -6,10 +6,6 @@ body {
   background: rgb(150, 136, 79);
 }
 
-.room-cell {
-  background: lightgrey!important;
-}
-
 .center {
     margin: auto;
     width: 95%;

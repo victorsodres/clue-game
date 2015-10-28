@@ -34,7 +34,9 @@ define(['setup'], function(setup){
       /* Pintando as Salas */
       function fillRoomColors(linhaInicial, linhaFinal, colunaInicial, rangeDireita){
         for(var i = linhaInicial; i < linhaFinal; i++)
-          b.cell([i, colunaInicial], rangeDireita).DOM().forEach(function(el){ el.classList.add('room-cell'); });
+          b.cell([i, colunaInicial], rangeDireita).DOM().forEach(function(el){
+            el.style.background = 'lightgrey';
+          });
       }
 
       //SALA - STUDY
@@ -82,7 +84,6 @@ define(['setup'], function(setup){
 
       doorArray.forEach(function(doorElement){
         doorElement.style.backgroundColor = doorColor;
-        doorElement.classList.remove('room-cell');
       });
 
     }
