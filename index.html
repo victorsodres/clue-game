@@ -3,6 +3,7 @@
 <head>
   <title>Detetive SI</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/lib/jquery-ui.css">
 </head>
 <body>
   <div id="content" class="center">
@@ -17,7 +18,21 @@
       <b>Movimentos:</b> <span id="movimentos"></span>
     </div>
 
+    <div id="dialog" title="Menu Inicial">
+      <p>Satanas.</p>
+    </div>
+
   </div>
   <script data-main="js/game.js" src="js/require.js"></script>
+  <script>
+    require.config({
+      baseUrl: "js",
+      paths: {
+          'jquery': 'lib/jquery',
+          'jquery-ui': 'lib/jquery-ui',
+          'jsboard': 'lib/jsboard'
+      }
+    });
+  </script>
 </body>
 </html>

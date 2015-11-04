@@ -1,4 +1,4 @@
-define(['lib/jsboard'], function(jsboard){
+define(['jsboard'], function(jsboard){
 
   window.b = jsboard.board({ attach: "game", size: "25x24" });
   b.cell("each").style({width:"30px", height:"30px", background: "rgb(192, 175, 104)"});
