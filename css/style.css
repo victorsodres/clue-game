@@ -19,6 +19,10 @@ body {
   background: lightgreen !important;
 }
 
+.modal {
+  display: none;
+}
+
 #HUD {
   background-color: lightgray;
   float: left;

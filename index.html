@@ -19,17 +19,41 @@
     </div>
 
     <!-- Modal -->
-    <div id="dialog"></div>
+    <div id="main-modal" class='modal'>
+      <button id='criar-jogo' style="margin-top: 10%; margin-left: 30%">Criar Jogo</button>
+    </div>
 
+    <div id="choose-character-modal" class='modal'>
+      <div class="choose-characters">
+        <input id="blue" type="radio" name="personagens" value="blue" />
+        <label for="blue">Azul</label>
+        <input id="red" type="radio" name="personagens" value="red" />
+        <label for="red">Vermelho</label>
+        <input id="green" type="radio" name="personagens" value="green" />
+        <label for="green">Verde</label>
+        <input id="yellow" type="radio" name="personagens" value="yellow" />
+        <label for="yellow">Amarelo</label>
+        <input id="purple" type="radio" name="personagens" value="purple" />
+        <label for="purple">Roxo</label>
+        <input id="white" type="radio" name="personagens" value="white" />
+        <label for="white">Branco</label>
+      </div>
+      <button id='iniciar-jogo' style="margin-top: 10%; margin-left: 30%">Iniciar Jogo</button>
+    </div>
+    <!-- Fim Modais -->
   </div>
-  <script data-main="js/game.js" src="js/require.js"></script>
+  <script data-main="js/game" src="js/lib/require.js"></script>
   <script>
     require.config({
-      baseUrl: "js",
+      baseUrl: "js/lib",
       paths: {
-          'jquery': 'lib/jquery',
-          'jquery-ui': 'lib/jquery-ui',
-          'jsboard': 'lib/jsboard'
+          game: '../game',
+          core: '../core',
+          entities: '../entities',
+          scenes: '../scenes'
+      },
+      shim: {
+        'jquery-ui': ['jquery']
       }
     });
   </script>

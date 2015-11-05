@@ -1,4 +1,4 @@
-define(['setup'], function(setup){
+define(['core/setup'], function(setup){
 
   Layout = {
     init: function() {

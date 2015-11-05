@@ -1,4 +1,4 @@
-require(['layout', 'setup', 'scenes/menu-modal'], function(Layout, Setup, MenuModal){
+require(['core/layout', 'core/setup', 'scenes/menu-modal'], function(Layout, Setup, MenuModal){
   Game = {
     init: function(){
       Setup.init();

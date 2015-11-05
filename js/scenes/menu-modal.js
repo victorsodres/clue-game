@@ -1,29 +1,26 @@
 define(['jquery', 'jquery-ui'], function($){
-  var modal = $('#dialog');
+  var mainModal = $('#main-modal');
+  var chooseCharacterModal = $('#choose-character-modal');
 
   var MainMenu = (function(){
-    
+
     //Funções Privadas
     buildMainModal = function(){
       var that = this;
-      var btnIniciarJogo = $('<button>', {id: 'iniciar-jogo', text: 'Iniciar Jogo'})
-        .css('margin-left', '30%')
-        .css('margin-top', '10%');
-
-      modal.append(btnIniciarJogo);
-
-      btnIniciarJogo.click(function(){
-        modal.dialog( "destroy" );
-        that.openModal({ title: 'Escolher Personagem' });
-        that.cleanModal();
+      $('#criar-jogo').click(function(){
+        mainModal.dialog( "destroy" );
+        that.openModal(chooseCharacterModal, { title: 'Escolher Personagem' });
+        buildChooseCharactersModal();
       });
     }
 
-    cleanModal = function(){
-      modal.children().remove();
+    buildChooseCharactersModal = function(){
+      $('#iniciar-jogo').click(function(){
+        chooseCharacterModal.dialog( "destroy" );
+      });
     }
 
-    openModal = function(attrs){
+    openModal = function(modal, attrs){
       modal.dialog({
         title: attrs.title,
         draggable: false,
@@ -32,14 +29,15 @@ define(['jquery', 'jquery-ui'], function($){
         dialogClass: "no-close",
         closeOnEscape: false,
         modal: true,
-        autoOpen: true
+        autoOpen: attrs.autoOpen
       });
     }
 
+    //Funçao publica
     return {
       start: function(){
         buildMainModal();
-        openModal({ title: 'Menu Inicial' });
+        openModal(mainModal, { title: 'Menu Inicial', autoOpen: true });
       }
     }
   })();
