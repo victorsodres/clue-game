@@ -11,6 +11,10 @@ body {
     width: 95%;
 }
 
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
 .green {
   background: lightgreen !important;
 }

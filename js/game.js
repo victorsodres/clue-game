@@ -1,44 +1,13 @@
-require(['layout', 'setup', 'jquery', 'jquery-ui'], function(Layout, Setup, $){
+require(['layout', 'setup', 'scenes/menu-modal'], function(Layout, Setup, MenuModal){
   Game = {
     init: function(){
       Setup.init();
       Layout.init();
-      this.openModal();
+      MenuModal.start();
     },
 
     rollDice: function(){
       return Math.floor(Math.random() * (6)) + 1
-    },
-
-    openModal: function(){
-      $( "#dialog" ).dialog({
-
-        closeOnEscape: false,
-        //open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
-        modal: true,
-        // buttons: {
-        //   Ok: function() {
-        //     $( this ).dialog( "close" );
-        //   }
-        // },
-        autoOpen: true
-      });
-
-      $('#btnIniciar').click(function(){
-        $( "#dialog" ).dialog("close");
-        $( "#choose" ).dialog({
-
-          closeOnEscape: false,
-          open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
-          modal: true,
-          // buttons: {
-          //   Ok: function() {
-          //     $( this ).dialog( "close" );
-          //   }
-          // },
-          autoOpen: true
-        });
-      });
     }
   };
 
