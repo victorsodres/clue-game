@@ -7,16 +7,40 @@ require(['layout', 'setup', 'jquery', 'jquery-ui'], function(Layout, Setup, $){
     },
 
     rollDice: function(){
-      return Math.floor(Math.random() * (7 - 1)) + 1
+      return Math.floor(Math.random() * (6)) + 1
     },
 
     openModal: function(){
       $( "#dialog" ).dialog({
-        dialogClass: "no-close",
+
+        closeOnEscape: false,
+        //open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
+        modal: true,
+        // buttons: {
+        //   Ok: function() {
+        //     $( this ).dialog( "close" );
+        //   }
+        // },
         autoOpen: true
       });
+
+      $('#btnIniciar').click(function(){
+        $( "#dialog" ).dialog("close");
+        $( "#choose" ).dialog({
+
+          closeOnEscape: false,
+          open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
+          modal: true,
+          // buttons: {
+          //   Ok: function() {
+          //     $( this ).dialog( "close" );
+          //   }
+          // },
+          autoOpen: true
+        });
+      });
     }
-  }
+  };
 
 //test
   document.getElementById('rolar-dado').onclick = function(){
