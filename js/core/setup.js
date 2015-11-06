@@ -1,11 +1,11 @@
-define(['jsboard'], function(jsboard){
+define(['jsboard', 'entities/card'], function(jsboard, Card){
 
   window.b = jsboard.board({ attach: "game", size: "25x24" });
   b.cell("each").style({width:"30px", height:"30px", background: "rgb(192, 175, 104)"});
 
   Setup = {
     init: function() {
-      var personagens = [
+      Game.personagens = [
         {
           color: 'red',
           name: 'Stephanie'
@@ -38,9 +38,13 @@ define(['jsboard'], function(jsboard){
         'Teoria da Computacao', 'Processos em TI'
       ];
 
-      var assuntosImportantes = listaAssuntos.map(function(el){
+      Game.assuntosImportantes = listaAssuntos.map(function(el){
         return { assunto: el };
       });
+
+      Game.disciplinas = ["Lógica de Programação", "L.T.P.", "T.A.Z.", "D.B.",
+       "Sistemas integrados de Gestão", "Arquitetura de Sistemas",
+       "Redes de Computadores", "Arquitetura de Computadores", "Sistemas Operacionais"];
 
       var playerRed = this.createUniquePiece('red', 'Stephanie');
       var playerYellow = this.createUniquePiece('yellow', 'Candido');
@@ -48,6 +52,9 @@ define(['jsboard'], function(jsboard){
       var playerPurple = this.createUniquePiece('purple', 'Maia');
       var playerBlue = this.createUniquePiece('blue', 'Igor');
       var playerWhite = this.createUniquePiece('white', 'Alati');
+
+      this.createCards();
+      this.setAccusedCards();
 
       //Colocando peça dos jogadores na posição inicial
       b.cell([5, 0]).place(playerPurple);
@@ -60,7 +67,7 @@ define(['jsboard'], function(jsboard){
       var players = [playerRed, playerYellow, playerGreen, playerPurple, playerBlue, playerWhite];
 
       //Give functionality to pieces
-      for(var i = 0; i < players.length; ++i){
+      for (var i = 0; i < players.length; ++i) {
         players[i].addEventListener('click', function(){
           showMoves(this);
         });
@@ -96,8 +103,6 @@ define(['jsboard'], function(jsboard){
         bindMoveLocs = newLocs.slice();
         bindMovePiece = piece;
         bindMoveEvents(bindMoveLocs);
-
-
       }
 
       // bind move event to new piece locations
@@ -152,6 +157,54 @@ define(['jsboard'], function(jsboard){
         margin:"0 auto",
         "background-size":"contain"
       }).clone();
+    },
+
+    createCards: function() {
+      Game.cards = [];
+      Game.personagens.forEach(function(p){
+        Game.cards.push(new Card('Personagem', p));
+      });
+      Game.assuntosImportantes.forEach(function(p){
+        Game.cards.push(new Card('Assunto Importante', p));
+      });
+      Game.disciplinas.forEach(function(p){
+        Game.cards.push(new Card('Disciplina', p));
+      });
+    },
+
+    scrambleCards: function(cards){
+      var aux = cards, temp = [], arraySize = cards.length;
+      for (var i = 0; i < arraySize ; i++) {
+        temp.push(aux.splice(Math.floor(Math.random() * aux.length), 1)[0]);
+      }
+      return temp;
+    },
+
+    setAccusedCards: function(){
+      var accuseds = [];
+      var personagensCartas = Game.cards.filter(function(card){
+        return card.type == 'Personagem';
+      });
+      var disciplinasCartas = Game.cards.filter(function(card){
+        return card.type == 'Assunto Importante';
+      });
+      var assuntosCartas = Game.cards.filter(function(card){
+        return card.type == 'Disciplina';
+      });
+
+      var pers = this.scrambleCards(personagensCartas)[0],
+          displ = this.scrambleCards(disciplinasCartas)[0],
+          assunto = this.scrambleCards(assuntosCartas)[0];
+
+      accuseds.push(pers);
+      accuseds.push(displ);
+      accuseds.push(assunto);
+
+      Game.cards = Game.cards.filter(function(card){
+        return (card != pers && card != displ && card != assunto)
+      })
+
+      Game.accused = accuseds;
     }
   }
 

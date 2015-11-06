@@ -16,7 +16,15 @@ define(['jquery', 'jquery-ui'], function($){
 
     buildChooseCharactersModal = function(){
       $('#iniciar-jogo').click(function(){
-        chooseCharacterModal.dialog( "destroy" );
+        var player = $('input[name=personagens]:checked')[0];
+        if (player){
+          chooseCharacterModal.dialog( "destroy" );
+          Game.myPlayer = Game.personagens.filter(function(i, el){
+            return i.color == player.value;
+          })[0];
+        } else {
+          alert('É necessário selecionar um personagem.');
+        }
       });
     }
 
