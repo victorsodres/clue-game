@@ -1,4 +1,4 @@
-define(['jsboard', 'entities/card'], function(jsboard, Card){
+define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, Player){
 
   window.b = jsboard.board({ attach: "game", size: "25x24" });
   b.cell("each").style({width:"30px", height:"30px", background: "rgb(192, 175, 104)"});
@@ -6,6 +6,7 @@ define(['jsboard', 'entities/card'], function(jsboard, Card){
   Setup = {
     init: function() {
       Game.personagens = [
+
         {
           color: 'red',
           name: 'Stephanie'
@@ -15,22 +16,30 @@ define(['jsboard', 'entities/card'], function(jsboard, Card){
           name: 'Candido'
         },
         {
-          color: 'green',
-          name: 'Sodre'
+          color: 'white',
+          name: 'Alati'
         },
         {
-          color: 'purple',
-          name: 'Maia'
+          color: 'green',
+          name: 'Sodre'
         },
         {
           color: 'blue',
           name: 'Igor'
         },
         {
-          color: 'white',
-          name: 'Alati'
+          color: 'purple',
+          name: 'Maia'
         }
       ];
+
+      Game.players = (function(){
+        var arr = [];
+        for(var i = 0; i < Game.personagens.length; i++){
+          arr.push(new Player(Game.personagens[i].color))
+        };
+        return arr;
+      })();
 
       var listaAssuntos = [
         'Padroes de Projeto', 'Paradigmas em Desenvolvimento de Sistemas',
@@ -55,6 +64,7 @@ define(['jsboard', 'entities/card'], function(jsboard, Card){
 
       this.createCards();
       this.setAccusedCards();
+      this.distribCards();
 
       //Colocando peça dos jogadores na posição inicial
       b.cell([5, 0]).place(playerPurple);
@@ -202,11 +212,20 @@ define(['jsboard', 'entities/card'], function(jsboard, Card){
 
       Game.cards = Game.cards.filter(function(card){
         return (card != pers && card != displ && card != assunto)
-      })
+      });
 
       Game.accused = accuseds;
+    },
+
+
+
+    distribCards: function(){
+      var scrambledCards = this.scrambleCards(Game.cards);
+      Game.players.forEach(function(el){
+            el.hand.push(scrambledCards.splice(0,3));
+      });
     }
-  }
+  };
 
   return Setup;
 });
