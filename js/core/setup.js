@@ -36,8 +36,8 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
       Game.players = (function(){
         var arr = [];
         for(var i = 0; i < Game.personagens.length; i++){
-          arr.push(new Player(Game.personagens[i].color))
-        };
+          arr.push(new Player(Game.personagens[i].color));
+        }
         return arr;
       })();
 
@@ -55,12 +55,20 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
        "Sistemas integrados de Gestão", "Arquitetura de Sistemas",
        "Redes de Computadores", "Arquitetura de Computadores", "Sistemas Operacionais"];
 
-      var playerRed = this.createUniquePiece('red', 'Stephanie');
-      var playerYellow = this.createUniquePiece('yellow', 'Candido');
-      var playerGreen = this.createUniquePiece('green', 'Sodre');
-      var playerPurple = this.createUniquePiece('purple', 'Maia');
-      var playerBlue = this.createUniquePiece('blue', 'Igor');
-      var playerWhite = this.createUniquePiece('white', 'Alati');
+      //  var playerRed = this.createUniquePiece('red', 'Stephanie');
+      //  var playerYellow = this.createUniquePiece('yellow', 'Candido');
+      //  var playerGreen = this.createUniquePiece('green', 'Sodre');
+      //  var playerPurple = this.createUniquePiece('purple', 'Maia');
+      //  var playerBlue = this.createUniquePiece('blue', 'Igor');
+      //  var playerWhite = this.createUniquePiece('white', 'Alati');
+       var playerRed = this.createUniquePiece('red', 'red');
+       var playerYellow = this.createUniquePiece('yellow', 'yellow');
+       var playerGreen = this.createUniquePiece('green', 'sodre');
+       var playerPurple = this.createUniquePiece('purple', 'purple');
+       var playerBlue = this.createUniquePiece('blue', 'blue');
+       var playerWhite = this.createUniquePiece('white', 'alati');
+
+      console.log(playerRed);
 
       this.createCards();
       this.setAccusedCards();
@@ -74,73 +82,10 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
       b.cell([b.rows()-1, 9]).place(playerGreen);
       b.cell([b.rows()-1, 14]).place(playerWhite);
 
-      var players = [playerRed, playerYellow, playerGreen, playerPurple, playerBlue, playerWhite];
+      Game.pieces = [playerRed, playerYellow, playerGreen, playerPurple, playerBlue, playerWhite];
 
       //Give functionality to pieces
-      for (var i = 0; i < players.length; ++i) {
-        players[i].addEventListener('click', function(){
-          showMoves(this);
-        });
-      }
 
-      function showMoves(piece){
-
-        resetBoard();
-        var thisPiece = b.cell(piece.parentNode).get();
-        var newLocs = [];
-        var loc;
-        loc = b.cell(piece.parentNode).where();
-
-        newLocs.push(
-                    [loc[0]-1,loc[1]],   [loc[0]+1,loc[1]],
-                    [loc[0],loc[1]-1],   [loc[0],loc[1]+1]
-                );
-
-        newLocs = newLocs.filter(function(loc){
-          return b.cell(loc).DOM().style.backgroundColor != "gray" && b.cell(loc).DOM().style.backgroundColor != "rgb(211, 211, 211)";
-        });
-
-        // remove illegal moves by checking
-        // content of b.cell().get()
-        (function removeIllegalMoves(arr) {
-            var fixedLocs = [];
-            for (var i=0; i<arr.length; i++)
-                if (b.cell(arr[i]).get()===null)
-                    fixedLocs.push(arr[i]);
-            newLocs = fixedLocs;
-        })(newLocs);
-
-        bindMoveLocs = newLocs.slice();
-        bindMovePiece = piece;
-        bindMoveEvents(bindMoveLocs);
-      }
-
-      // bind move event to new piece locations
-      function bindMoveEvents(locs) {
-          for (var i=0; i<locs.length; i++) {
-              b.cell(locs[i]).DOM().classList.add("green");
-              b.cell(locs[i]).on("click", movePiece);
-          }
-      }
-
-      // actually move the piece
-      function movePiece() {
-          var userClick = b.cell(this).where();
-          if (bindMoveLocs.indexOf(userClick)) {
-              b.cell(userClick).place(bindMovePiece);
-              resetBoard();
-          }
-      }
-
-      // remove previous green spaces and event listeners
-      function resetBoard() {
-          for (var r=0; r<b.rows(); r++) {
-              for (var c=0; c<b.cols(); c++) {
-                  b.cell([r,c]).DOM().classList.remove("green");
-                  b.cell([r,c]).removeOn("click", movePiece);
-              }
-          }
-      }
 
       b.cell([5, 0]).place(playerPurple);
       b.cell([0, 16]).place(playerRed);
@@ -155,6 +100,8 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
       //   else
       //     b.cell(this).rid();
       // });
+
+
     },
 
     createUniquePiece: function(color, text){
@@ -222,6 +169,77 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
       Game.players.forEach(function(el){
         el.hand = scrambledCards.splice(0,3);
       });
+    },
+
+    setTurn: function(){
+      for (var i = 0; i < Game.pieces.length; ++i) {
+        // console.log(Game.turnPlayer);
+        // console.log(Game.pieces[i].innerHTML);
+        if(Game.turnPlayer.token == Game.pieces[i].innerHTML){
+          Game.pieces[i].addEventListener('click', function(){
+            showMoves(this);
+          });
+        }
+      }
+
+      function showMoves(piece){
+
+        resetBoard();
+        var thisPiece = b.cell(piece.parentNode).get();
+        var newLocs = [];
+        var loc;
+        loc = b.cell(piece.parentNode).where();
+
+        newLocs.push(
+                    [loc[0]-1,loc[1]],   [loc[0]+1,loc[1]],
+                    [loc[0],loc[1]-1],   [loc[0],loc[1]+1]
+                );
+
+        newLocs = newLocs.filter(function(loc){
+          return b.cell(loc).DOM().style.backgroundColor != "gray" && b.cell(loc).DOM().style.backgroundColor != "rgb(211, 211, 211)";
+        });
+
+        // remove illegal moves by checking
+        // content of b.cell().get()
+        (function removeIllegalMoves(arr) {
+            var fixedLocs = [];
+            for (var i=0; i<arr.length; i++)
+                if (b.cell(arr[i]).get()===null)
+                    fixedLocs.push(arr[i]);
+            newLocs = fixedLocs;
+        })(newLocs);
+
+        bindMoveLocs = newLocs.slice();
+        bindMovePiece = piece;
+        bindMoveEvents(bindMoveLocs);
+      }
+
+      // bind move event to new piece locations
+      function bindMoveEvents(locs) {
+          for (var i=0; i<locs.length; i++) {
+              b.cell(locs[i]).DOM().classList.add("green");
+              b.cell(locs[i]).on("click", movePiece);
+          }
+      }
+
+      // actually move the piece
+      function movePiece() {
+          var userClick = b.cell(this).where();
+          if (bindMoveLocs.indexOf(userClick)) {
+              b.cell(userClick).place(bindMovePiece);
+              resetBoard();
+          }
+      }
+
+      // remove previous green spaces and event listeners
+      function resetBoard() {
+          for (var r=0; r<b.rows(); r++) {
+              for (var c=0; c<b.cols(); c++) {
+                  b.cell([r,c]).DOM().classList.remove("green");
+                  b.cell([r,c]).removeOn("click", movePiece);
+              }
+          }
+      }
     }
   };
 

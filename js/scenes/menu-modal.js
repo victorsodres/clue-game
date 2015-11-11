@@ -12,7 +12,7 @@ define(['jquery', 'jquery-ui'], function($){
         that.openModal(chooseCharacterModal, { title: 'Escolher Personagem' });
         buildChooseCharactersModal();
       });
-    }
+    };
 
     buildChooseCharactersModal = function(){
       $('#iniciar-jogo').click(function(){
@@ -29,7 +29,7 @@ define(['jquery', 'jquery-ui'], function($){
           alert('É necessário selecionar um personagem.');
         }
       });
-    }
+    };
 
     openModal = function(modal, attrs){
       modal.dialog({
@@ -42,7 +42,7 @@ define(['jquery', 'jquery-ui'], function($){
         modal: true,
         autoOpen: attrs.autoOpen
       });
-    }
+    };
 
     //Funçao publica
     return {
@@ -50,7 +50,7 @@ define(['jquery', 'jquery-ui'], function($){
         buildMainModal();
         openModal(mainModal, { title: 'Menu Inicial', autoOpen: true });
       }
-    }
+    };
   })();
 
   return MainMenu;

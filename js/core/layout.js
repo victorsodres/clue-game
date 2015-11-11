@@ -16,6 +16,9 @@ define(['core/setup'], function(setup){
       b.cell([b.rows()-1, 9]).style(this.backColor('green'));
       b.cell([b.rows()-1, 14]).style(this.backColor('white'));
 
+
+
+
       /* Pintando as Salas */
       //SALA - STUDY
       this.fillRoomColors(0, 4, 0, 7);
@@ -63,6 +66,17 @@ define(['core/setup'], function(setup){
       doorArray.forEach(function(doorElement){
         doorElement.style.backgroundColor = doorColor;
       });
+
+      b.cell([9, 10]).style(this.backColor('black'));
+      b.cell([9, 11]).style(this.backColor('black'));
+      b.cell([9, 12]).style(this.backColor('black'));
+      b.cell([10, 10]).style(this.backColor('black'));
+      b.cell([10, 12]).style(this.backColor('black'));
+      b.cell([11, 11]).style(this.backColor('black'));
+      b.cell([11, 12]).style(this.backColor('black'));
+      b.cell([12, 11]).style(this.backColor('black'));
+      b.cell([14, 11]).style(this.backColor('black'));
+
 
     },
 

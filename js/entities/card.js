@@ -13,7 +13,7 @@ define([], function(){
   var Card = function(type, content){
     this.type = type;
     this.content = content;
-  }
+  };
 
   return Card;
 });
