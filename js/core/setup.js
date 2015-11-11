@@ -61,12 +61,12 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
       //  var playerPurple = this.createUniquePiece('purple', 'Maia');
       //  var playerBlue = this.createUniquePiece('blue', 'Igor');
       //  var playerWhite = this.createUniquePiece('white', 'Alati');
-       var playerRed = this.createUniquePiece('red', 'red');
-       var playerYellow = this.createUniquePiece('yellow', 'yellow');
-       var playerGreen = this.createUniquePiece('green', 'sodre');
-       var playerPurple = this.createUniquePiece('purple', 'purple');
-       var playerBlue = this.createUniquePiece('blue', 'blue');
-       var playerWhite = this.createUniquePiece('white', 'alati');
+       var playerRed = this.createUniquePiece('red');
+       var playerYellow = this.createUniquePiece('yellow');
+       var playerGreen = this.createUniquePiece('green');
+       var playerPurple = this.createUniquePiece('purple');
+       var playerBlue = this.createUniquePiece('blue');
+       var playerWhite = this.createUniquePiece('white');
 
       console.log(playerRed);
 
@@ -104,9 +104,9 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
 
     },
 
-    createUniquePiece: function(color, text){
+    createUniquePiece: function(color){
       return jsboard.piece({
-        text: text,
+        text: color,
         textIndent:"-9999px",
         background:"url('img/pieces/"+color+".svg') no-repeat",
         width:"20px",
@@ -173,8 +173,8 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
 
     setTurn: function(){
       for (var i = 0; i < Game.pieces.length; ++i) {
-        // console.log(Game.turnPlayer);
-        // console.log(Game.pieces[i].innerHTML);
+         //console.log(Game.turnPlayer);
+         //console.log(Game.pieces[i]);
         if(Game.turnPlayer.token == Game.pieces[i].innerHTML){
           Game.pieces[i].addEventListener('click', function(){
             showMoves(this);
