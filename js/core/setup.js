@@ -5,6 +5,8 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
 
   Setup = {
     init: function() {
+      var _self = this;
+
       Game.personagens = [
 
         {
@@ -84,9 +86,6 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
 
       Game.pieces = [playerRed, playerYellow, playerGreen, playerPurple, playerBlue, playerWhite];
 
-      //Give functionality to pieces
-
-
       b.cell([5, 0]).place(playerPurple);
       b.cell([0, 16]).place(playerRed);
       b.cell([7, b.cols()-1]).place(playerYellow);
@@ -94,6 +93,13 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
       b.cell([b.rows()-1, 9]).place(playerGreen);
       b.cell([b.rows()-1, 14]).place(playerWhite);
 
+
+
+      $("#proximo-turno").click(function(){
+        _self.setNextPlayer();
+        $("#turno-jogador").text('Turno do Jogador: ' + Game.turnPlayer.token);
+        _self.setTurn();
+      });
       // b.cell("each").on("click", function() {
       //   if (b.cell(this).get() === null)
       //     b.cell(this).place(playerRed);
@@ -102,6 +108,14 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
       // });
 
 
+    },
+
+    setNextPlayer: function(){
+      Game.turnPlayer = this.getNextPlayer() || Game.players[0];
+    },
+
+    getNextPlayer: function(){
+      return Game.players[Game.players.indexOf(Game.turnPlayer) + 1];
     },
 
     createUniquePiece: function(color){
@@ -173,8 +187,6 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
 
     setTurn: function(){
       for (var i = 0; i < Game.pieces.length; ++i) {
-         //console.log(Game.turnPlayer);
-         //console.log(Game.pieces[i]);
         if(Game.turnPlayer.token == Game.pieces[i].innerHTML){
           Game.pieces[i].addEventListener('click', function(){
             showMoves(this);
