@@ -19,9 +19,12 @@ define(['jquery', 'jquery-ui'], function($){
         var player = $('input[name=personagens]:checked')[0];
         if (player){
           chooseCharacterModal.dialog( "destroy" );
-          Game.turnPlayer = Game.players.filter(function(el){
+          Game.myPlayer = Game.players.filter(function(el){
             return el.token == player.value;
           })[0];
+          Game.turnPlayer = Game.players[0];
+          $("#turno-jogador").text('Turno do Jogador: ' + Game.turnPlayer.token);
+          Game.start();
         } else {
           alert('É necessário selecionar um personagem.');
         }

@@ -217,12 +217,10 @@ define(['jsboard', 'entities/card', 'entities/player'], function(jsboard, Card, 
       Game.accused = accuseds;
     },
 
-
-
     distribCards: function(){
       var scrambledCards = this.scrambleCards(Game.cards);
       Game.players.forEach(function(el){
-            el.hand.push(scrambledCards.splice(0,3));
+        el.hand = scrambledCards.splice(0,3);
       });
     }
   };

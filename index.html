@@ -13,9 +13,18 @@
     </div>
 
     <div id="HUD">
+      <span id="turno-jogador"></span><br>
       <button id="rolar-dado">Rolar o Dado!</button>
       <span id="msg-resultado-dado"></span><br>
       <b>Movimentos:</b> <span id="movimentos"></span>
+
+      <fieldset>
+        <legend>Cartas na Mao</legend>
+        <div id="player-hand">
+        </div>
+      </fieldset>
+
+      <button id="proximo-turno" disabled="true">Terminar Turno</button>
     </div>
 
     <!-- Modal -->
@@ -42,6 +51,7 @@
     </div>
     <!-- Fim Modais -->
   </div>
+  <!--<script src="https://togetherjs.com/togetherjs-min.js"></script> -->
   <script data-main="js/game" src="js/lib/require.js"></script>
   <script>
     require.config({
@@ -56,6 +66,8 @@
         'jquery-ui': ['jquery']
       }
     });
+
+    //TogetherJS(this);
   </script>
 </body>
 </html>
